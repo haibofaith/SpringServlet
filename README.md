@@ -16,5 +16,19 @@ Servlet结合Spring使用
 ServletContext sctx = arg0.getServletContext();</br>
 String configLocation = (String) sctx.getInitParameter("configLocation");</br>
 
-
+4.spring已经提供servletContextListener实现类ContextLoaderListener</br>
+1）在web.xml中自动生成：</br>
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>location</param-value>
+</context-param>
+<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+</br>
+遇到问题Could not open ServletContext resource [/WEB-INF/applicationContext.xml]</br>
+处理方案将applicationContext文件放到WEBINF目录下</br>
+使用：</br>
+ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+System.out.println(ctx.getBean("person").toString());	
 
